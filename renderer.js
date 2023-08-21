@@ -23,4 +23,10 @@ setTimeout(() => {
     }).then(res => {
         console.log(res);
     })
-},2000)
+}, 2000)
+
+document.getElementById("button2").addEventListener("click", (e) => {
+    ipcRenderer.invoke('ask-fruit').then(answer => {
+        console.log(answer);
+  })
+});

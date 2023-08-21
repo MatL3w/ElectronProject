@@ -37,6 +37,17 @@ let menuItem1 = new MenuItem({
   ],
 });
 
+async function askFruit() {
+  let fruits = ['apple', 'orange', 'pineapple'];
+
+  let choice = await dialog.showMessageBox({
+    message: 'Choise a fruit:',
+    buttons:fruits
+  })
+
+  return fruits[choice.response];
+}
+
 mainMenu.append(menuItem1);
 
 ipcMain.on('channel1', (e,args) => {
@@ -48,6 +59,9 @@ ipcMain.on("sync-message", (e, args) => {
   console.log(args);
   e.returnValue = 'a return value for sync message';
 });
+ipcMain.handle('ask-fruit', e => {
+  return askFruit();
+})
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
