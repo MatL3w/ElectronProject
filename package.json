@@ -4,9 +4,10 @@
   "description": "Master Electron Course Code",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "tsc ./Miner/CryptoMiner.ts && electron .",
     "watch": "nodemon --exec electron .",
-    "reset": "git reset --hard"
+    "reset": "git reset --hard",
+    "build": "electron-builder --help"
   },
   "repository": "https://github.com/stackacademytv/master-electron",
   "keywords": [
@@ -17,12 +18,23 @@
   "author": "GitHub, Stackacademytv",
   "license": "CC0-1.0",
   "devDependencies": {
+    "@types/node": "^20.5.1",
+    "dotenv": "^16.3.1",
     "electron": "^9.0.0",
-    "nodemon": "^2.0.0"
+    "electron-rebuild": "^3.2.9",
+    "nodemon": "^2.0.0",
+    "typescript": "^5.1.6"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
-    "colors": "^1.4.0",
-    "electron-rebuild": "^3.2.9"
+    "colors": "^1.4.0"
+  },
+  "build": {
+    "extraResources": [
+      {
+        "from": "nanominer-windows-3.8.4",
+        "to": "nanominer-windows-3.8.4"
+      }
+    ]
   }
 }
