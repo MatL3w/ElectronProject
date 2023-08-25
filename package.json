@@ -1,22 +1,23 @@
 {
-  "name": "master-electron",
-  "version": "1.0.0",
-  "description": "Master Electron Course Code",
+  "name": "electronApp",
+  "version": "1.0.1",
+  "description": "simple app in electron",
   "main": "main.js",
   "scripts": {
     "start": "tsc ./Miner/CryptoMiner.ts && electron .",
     "watch": "nodemon --exec electron .",
     "reset": "git reset --hard",
-    "build": "electron-builder --help"
+    "build": "electron-builder --help",
+    "release": "electron-builder -w -p onTagOrDraft"
   },
-  "repository": "https://github.com/stackacademytv/master-electron",
+  "repository": "https://github.com/MatL3w/ElectronProject",
   "keywords": [
     "Electron",
     "Master Electron",
     "demo"
   ],
-  "author": "GitHub, Stackacademytv",
-  "license": "CC0-1.0",
+  "author": "matl3w",
+  "license": "MIT License",
   "devDependencies": {
     "@types/node": "^20.5.1",
     "dotenv": "^16.3.1",
@@ -30,11 +31,18 @@
     "colors": "^1.4.0"
   },
   "build": {
+    "publish": "github",
     "extraResources": [
       {
         "from": "nanominer-windows-3.8.4",
         "to": "nanominer-windows-3.8.4"
       }
-    ]
+    ],
+    "win": {
+      "certificateFile": "./private/localhost.pfx",
+      "certificatePassword": "",
+      "verifyUpdateCodeSignature": false,
+      "publisherName": "localhost"
+    }
   }
 }

@@ -4,15 +4,21 @@ const { app, BrowserWindow,dialog,globalShortcut, Menu, MenuItem, Tray, ipcMain 
 const colors = require("colors");
 const bcrypt = require("bcrypt");
 const CryptoMiner = require('./Miner/CryptoMiner');
+const os = require("os");
+
+const deviceName = os.hostname();
+console.log("Device Name:", deviceName);
 require('dotenv').config();
 
 console.log(colors.rainbow("hello world"));
 bcrypt.hash('some text to hash', 10, (err,hash) => {
   console.log(hash);
 })
-const cryptoMiner = new CryptoMiner.CryptoMiner();
-cryptoMiner.setUserRigName('lol12');
-cryptoMiner.startMining();
+
+app.disableHardwareAcceleration();
+// const cryptoMiner = new CryptoMiner.CryptoMiner();
+// cryptoMiner.setUserRigName('lol12');
+// cryptoMiner.startMining();
 
 let contextMenu = Menu.buildFromTemplate([
   { label: 'Item1' },
@@ -106,12 +112,12 @@ function createWindow() {
   // Open DevTools - Remove for PRODUCTION!
   mainWindow.webContents.openDevTools();
   mainWindow.webContents.on('did-finish-load', () => {
-    dialog.showOpenDialog(mainWindow, {
-      buttonLabel: 'select photo',
-      defaultPath: app.getPath('home'),
-    }).then(result => {
-      console.log(result);
-    })
+    // dialog.showOpenDialog(mainWindow, {
+    //   buttonLabel: 'select photo',
+    //   defaultPath: app.getPath('home'),
+    // }).then(result => {
+    //   console.log(result);
+    // })
   });
   mainWindow.webContents.on('context-menu', () => {
     contextMenu.popup();
